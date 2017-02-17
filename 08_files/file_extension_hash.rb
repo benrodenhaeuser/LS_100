@@ -1,46 +1,40 @@
 # A method that goes through a directory and produces a hash
 # where the hash keys are all the file extensions such that there are files with that extension in the directory
 # and the value to each key is an array of filenames with the extension given by the key
+# we want the value for each key to be sorted alphabetically
 
 def create_hash(directory)
   hash = { }
   d = Dir.new(directory)
-  while file_name = d.read do
-    ext = File.extname(file_name)
-    if ext != "" # file has a "proper" extension (to exclude directories)
-      if hash[ext] # it's not the first file with that extension: append!
-        hash[ext] << file_name
-      else # it's the first one: create the array!
-        hash[ext] = [file_name]
+  while file_name = d.read do # at some point, d.read will return nil, so the condition fails, so the loop terminates
+    ext = File.extname(file_name) # grab the extension
+    if ext != "" # if file has a "proper" extension (to exclude directories) ...
+      if hash[ext] # if file is not the first file with that extension ...
+        hash[ext] << file_name # ... append to existing array
+      else # if file is the first file with that extension ...
+        hash[ext] = [file_name] # ... create array, put file in it
       end
     end
   end
-  hash
+  hash.each_key { |key| hash[key].sort! } # sort files alphabetically
+  hash # done!
 end
 
-### Now let's redo this using the Pathname class instead of Dir (just to get a little familiar with pathname)
+# test: create a hash
+hash = create_hash("./test_files") # in test_files, we have stored some test files ...
 
-require "pathname"
+# just for fun: let's turn the hash into a sorted array,
+# sorted by extension first, and by filename second
 
-def create_hash_variant(directory)
-  hash = { }
-  pn = Pathname.new(directory)
-  pn.entries.each do |file|
-    # puts file.basename
-    ext = file.extname
-    file_name = file.basename.to_s # convert pathname object to string
-    if ext != "" # file has a "proper" extension (to exclude directories)
-      if hash[ext] # it's not the first file with that extension: append!
-        hash[ext] << file_name
-      else # it's the first one, so we need to create the array
-        hash[ext] = [file_name]
-      end
-    end
-  end
-  hash
+def get_extensions hash
+  extensions = [ ]
+  extensions.each_key { |extension| extensions << extension }
+  keys
 end
 
-# test
-puts create_hash(".")
-puts create_hash_variant(".")
-puts create_hash(".") == create_hash_variant(".") # true
+extensions = get_extensions(hash).sort! # sort extensions alphabetically
+sorted_files = [ ]
+extensions.each do |extension|
+  sorted_files += hash[extension] # recall from above that hash[extension] is sorted!
+end
+puts files
