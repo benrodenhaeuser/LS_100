@@ -19,7 +19,11 @@ def indent_string(depth)
     if counter % 2 == 1
       indent << "  "
     else
-      indent << "|"
+      if indent == "" # we are still at the very left
+        indent << " "
+      else
+        indent << "|"
+      end
     end
     counter -= 1
   end
@@ -31,7 +35,7 @@ def fibonacci(number)
   if number < 2
     number # base case: fibonacci(1) = 1 and fibonacci(2) = 2
   else
-    fibonacci(number - 1) + fibonacci(number - 2) # recursive case: "the sum of the result for the two preceding naturals"
+    fibonacci(number - 1) + fibonacci(number - 2) # recursive case: "the sum of the results for the two preceding naturals"
   end
 end
 
