@@ -16,10 +16,10 @@ def indent_string(depth)
   counter = indent_level
   indent = ""
   while counter != 0
-    if counter % 2 == 0
-      indent << "|"
-    else
+    if counter % 2 == 1
       indent << "  "
+    else
+      indent << "|"
     end
     counter -= 1
   end
