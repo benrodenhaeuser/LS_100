@@ -1,7 +1,7 @@
-# A method that goes through a directory and produces a hash
+# A method that walks through a directory and produces a hash
 # where the hash keys are all the file extensions such that there are files with that extension in the directory
-# and the value to each key is an array of filenames with the extension given by the key
-# we want the value for each key to be sorted alphabetically
+# and the value for each key is an array of filenames with the extension given by the key
+# these arrays are sorted alphabetically
 
 def create_hash(directory)
   hash = { }
@@ -28,13 +28,13 @@ hash = create_hash("./test_files") # in test_files, we have stored some test fil
 
 def get_extensions hash
   extensions = [ ]
-  extensions.each_key { |extension| extensions << extension }
-  keys
+  hash.each_key { |key| extensions << key }
+  extensions
 end
 
 extensions = get_extensions(hash).sort! # sort extensions alphabetically
 sorted_files = [ ]
 extensions.each do |extension|
-  sorted_files += hash[extension] # recall from above that hash[extension] is sorted!
+  sorted_files += hash[extension]
 end
-puts files
+puts sorted_files
