@@ -10,4 +10,4 @@ execute { puts "Hello from inside the execute method!" }
 # the following will print the argument of puts:
 execute { puts "Hello from inside the execute method!" }.call
 
-# another (better) way of fixing the problem is to change "block" into "block.call" in the body of the execute method.
+# another (better) way of fixing the problem is to change "block" into "block.call" in the body of the execute method
