@@ -1,7 +1,7 @@
 # lets create the files for our 17 exercises, using the format "01.rb"
 
 def create_file(filename,filenumber)
-  unless File.exist?(filename) # don't want to mess with existing files!
+  unless File.exist?(filename) # don't mess with existing files!
     file = File.open(filename,"w") { |file| file.write("\# exercise #{filenumber}") }
     puts "created file #{filename}"
   end
