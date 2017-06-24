@@ -1,0 +1,5 @@
+name, date of birth, city, country
+ben rodenhauser, 17.01.1977, berlin, germany
+julia ochsenhirt, 29.10.1975, berlin, germany
+sabine rodenhauser, 04.03.1951, stuttgart, germany
+patrick linnebach, unknown, essen, germany
